@@ -58,11 +58,16 @@ cc_binary {
     ],
     local_include_dirs: ["include"],
     cflags: [
+        "-O3",
         "-Wall",
         "-Werror",
         "-Wextra",
         "-DLMKD_TRACE_KILLS"
     ],
+    lto: {
+        thin: true,
+    },
+    whole_program_vtables: true, // Requires LTO
     init_rc: ["lmkd.rc"],
     defaults: ["stats_defaults", "lmkd_hooks_defaults"],
     logtags: ["event.logtags"],
@@ -98,5 +103,6 @@ cc_library_static {
         "-g",
         "-Wall",
         "-Werror",
+        "-O3",
     ]
 }
